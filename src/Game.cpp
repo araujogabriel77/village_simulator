@@ -112,6 +112,13 @@ void Game::render_system() {
 
     for (const auto& building: _buildings) {
         building->draw(&_window);
+
+        // @TODO: mover para economy system
+        const auto prev_dindin = building->balance();
+        building->make_money();
+        if (prev_dindin < building->balance()) {
+            std::cout << building->balance() << std::endl;
+        }
     }
     _window.display();
 }

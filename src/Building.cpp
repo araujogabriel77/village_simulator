@@ -37,6 +37,21 @@ void Building::set_rentability(const float &rentability) {
     _rentability = rentability;
 }
 
+void Building::set_seconds_to_profit(const int &seconds) {
+    _seconds_to_profit = seconds;
+}
+
+bool Building::is_ready_to_profit() const {
+    return get_elapsed_time() >= _seconds_to_profit;
+}
+
+void Building::make_money() {
+    if (is_ready_to_profit()) {
+        update_balance();
+        init_time_count();
+    }
+}
+
 void Building::update_balance() {
     _balance += _rentability;
 }
@@ -56,7 +71,6 @@ SharedPtrShape Building::shape() {
 int Building::id() const {
     return _id;
 }
-
 
 float Building::balance() const {
     return _balance;

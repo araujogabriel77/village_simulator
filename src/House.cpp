@@ -10,6 +10,7 @@ House::House(const size_t &id, const Vec2 &pos)
     initialize_shape();
     set_cost(_house_cost);
     set_rentability(_house_rentability);
+    set_seconds_to_profit(_house_seconds_to_profit);
 }
 
 void House::initialize_shape() {

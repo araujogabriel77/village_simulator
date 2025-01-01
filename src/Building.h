@@ -19,6 +19,7 @@ protected:
     float _balance = 0;
     float _cost = 0;
     float _rentability = 0;
+    int _seconds_to_profit = 0;
     sf::Clock _clock;
 
     SharedPtrShape _shape = nullptr;
@@ -52,6 +53,12 @@ public:
 
     void set_rentability(const float &rentability);
 
+    void set_seconds_to_profit(const int &seconds);
+
+    void make_money();
+
+    bool is_ready_to_profit() const;
+
     int id() const;
 
     float balance() const;
@@ -59,6 +66,8 @@ public:
     float cost() const;
 
     float rentability() const;
+
+    int seconds_to_profit() const;
 };
 
 #endif //BUILDING_H

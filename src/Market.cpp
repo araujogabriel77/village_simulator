@@ -9,6 +9,7 @@ Market::Market(const size_t &id, const Vec2 &pos)
     initialize_shape();
     set_cost(_market_cost);
     set_rentability(_market_rentability);
+    set_seconds_to_profit(_market_seconds_to_profit);
 }
 
 void Market::initialize_shape() {

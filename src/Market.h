@@ -16,6 +16,7 @@ protected:
 
     float _market_cost = 100;
     float _market_rentability = 5;
+    int _market_seconds_to_profit = 3;
 
     void initialize_shape() override;
 

@@ -17,6 +17,7 @@ protected:
 
     float _house_cost = 30;
     float _house_rentability = 2;
+    float _house_seconds_to_profit = 2;
 
     void initialize_shape() override;
 
