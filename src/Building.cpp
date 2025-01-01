@@ -33,8 +33,8 @@ void Building::update_balance() {
     _balance += _rentability;
 }
 
-void Building::change_pos(const Vec2 &pos) {
-    _pos = pos;
+void Building::change_pos(const Vec2 &pos) const {
+    _shape->setPosition(pos.x, pos.y);
 }
 
 SharedPtrShape Building::shape() {

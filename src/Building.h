@@ -31,7 +31,7 @@ public:
 
     void update_balance();
 
-    void change_pos(const Vec2 &pos);
+    void change_pos(const Vec2 &pos) const;
 
     void change_shape_outline_thickness(const int &thickness);
 

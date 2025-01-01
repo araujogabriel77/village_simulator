@@ -84,7 +84,7 @@ void Game::user_input_system() {
 
 void Game::update_current_selected_building_position() const {
     const auto mouse_position = sf::Mouse::getPosition(_window); // Posição do mouse em relação à janela
-    _current_selected_building->shape()->setPosition(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y));// Ajustar para centralizar o círculo
+    _current_selected_building->change_pos(Vec2(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y)));// Ajustar para centralizar o círculo
 }
 
 void Game::add_building(const std::shared_ptr<Building>& building_to_add) {
