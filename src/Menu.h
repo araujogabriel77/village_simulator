@@ -4,12 +4,13 @@
 
 #ifndef MENU_H
 #define MENU_H
+#include "Components.h"
 #include "MenuOption.h"
 
 class Menu {
 private:
-    std::vector<std::string> _building_names = {"House", "Market"};
-    std::map<std::string, Vec2> _options;
+    std::vector<BuildingType> _building_types = { BuildingType::House, BuildingType::Market};
+    std::map<BuildingType, Vec2> _options;
     std::vector<std::shared_ptr<Building> > _option_shapes;
     Vec2 _option_size = Vec2(50, 50);
 
@@ -18,7 +19,7 @@ private:
     Vec2 _position;
     sf::Color _menu_color = sf::Color::Transparent;
     sf::Color _menu_outline_color = sf::Color::Red;
-    int _menu_outline_thickness = 2;
+    float _menu_outline_thickness = 2;
     int _options_gap = 50;
 
     void setOptions();
@@ -32,7 +33,7 @@ public:
 
     Vec2 position();
 
-    std::map<std::string, Vec2> &options();
+    std::map<BuildingType, Vec2> &options();
 
     std::shared_ptr<sf::Shape> shape();
 
@@ -40,7 +41,7 @@ public:
 
     void draw_options_in_screen(sf::RenderWindow *window);
 
-    bool option_has_selected(const Vec2 &origin);
+    BuildingType get_selected_option_building_type(const Vec2 &origin);
 };
 
 #endif //MENU_H

@@ -15,4 +15,10 @@ public:
     }
 };
 
+enum class BuildingType {
+    House,
+    Market,
+    None
+};
+
 #endif //COMPONENTS_H

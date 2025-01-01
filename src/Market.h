@@ -12,7 +12,7 @@ protected:
     sf::Vector2f _market_shape_size = sf::Vector2f(80, 80);
     sf::Color _market_shape_color = sf::Color::Blue;
     sf::Color _market_outline_color = sf::Color::White;
-    int _market_shape_outline_thickness = 1;
+    float _market_shape_outline_thickness = 1;
 
     float _market_cost = 100;
     float _market_rentability = 5;
