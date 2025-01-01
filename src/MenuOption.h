@@ -4,8 +4,8 @@
 
 #ifndef MENU_OPTION_H
 #define MENU_OPTION_H
-#include <memory>
 
+#include <memory>
 #include "Building.h"
 
 class MenuOption {

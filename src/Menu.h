@@ -5,7 +5,8 @@
 #ifndef MENU_H
 #define MENU_H
 #include "Components.h"
-#include "MenuOption.h"
+#include "Building.h"
+#include "map"
 
 class Menu {
 private:
@@ -29,9 +30,9 @@ private:
 public:
     Menu(Vec2 size, Vec2 position);
 
-    Vec2 size();
+    Vec2 size() const;
 
-    Vec2 position();
+    Vec2 position() const;
 
     std::map<BuildingType, Vec2> &options();
 

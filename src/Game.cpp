@@ -41,15 +41,17 @@ void Game::user_input_system() {
                 const BuildingType building = _menu.get_selected_option_building_type(mouse_origin);
                 std::cout << (_current_selected_building != nullptr) << "\n";
 
+                int building_id = _current_selected_building_id + (_buildings.size() + 1);
+
                 switch (building) {
                     case BuildingType::House: {
                         _current_selected_building = std::make_shared<House>(
-                        _current_selected_building_id, Vec2(500, 500));
+                        building_id, Vec2(500, 500));
                         break;
                     }
                     case BuildingType::Market: {
                         _current_selected_building = std::make_shared<Market>(
-                        _current_selected_building_id, Vec2(500, 500));
+                        building_id, Vec2(500, 500));
                         break;
                     }
                     case BuildingType::None: {
@@ -67,6 +69,7 @@ void Game::user_input_system() {
             }
             if (event.mouseButton.button == sf::Mouse::Left && _has_building_selected)
             {
+                _current_selected_building->init_time_count();
                 add_building(_current_selected_building);
                 deselect_current_building();
                 return;
@@ -99,18 +102,16 @@ void Game::deselect_current_building() {
 void Game::render_system() {
     _window.clear();
 
-    // menu
     _window.draw(*_menu.shape());
     _menu.draw_options_in_screen(&_window);
 
-    //draw selected building shape on mouse
     if (_has_building_selected) {
         update_current_selected_building_position();
-        _window.draw(*_current_selected_building->shape());
+        _current_selected_building->draw(&_window);
     }
 
     for (const auto& building: _buildings) {
-        _window.draw(*building->shape());
+        building->draw(&_window);
     }
     _window.display();
 }

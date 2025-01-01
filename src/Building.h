@@ -19,6 +19,7 @@ protected:
     float _balance = 0;
     float _cost = 0;
     float _rentability = 0;
+    sf::Clock _clock;
 
     SharedPtrShape _shape = nullptr;
 
@@ -33,17 +34,25 @@ public:
 
     void change_pos(const Vec2 &pos) const;
 
-    void change_shape_outline_thickness(const int &thickness);
+    void change_shape_outline_thickness(const int &thickness) const;
 
-    void change_shape_color(const sf::Color &color);
+    void change_shape_color(const sf::Color &color) const;
 
-    void change_shape_size(const Vec2 &size);
+    void change_shape_size(const Vec2 &size) const;
+
+    void draw(sf::RenderWindow *window) const;
 
     SharedPtrShape shape();
+
+    void init_time_count();
+
+    float get_elapsed_time() const;
 
     void set_cost(const float &cost);
 
     void set_rentability(const float &rentability);
+
+    int id() const;
 
     float balance() const;
 

@@ -12,10 +12,9 @@ Market::Market(const size_t &id, const Vec2 &pos)
 }
 
 void Market::initialize_shape() {
-    const auto shape = std::make_shared<sf::RectangleShape>(_market_shape_size);
-    shape->setFillColor(_market_shape_color);
-    shape->setOutlineThickness(_market_shape_outline_thickness);
-    shape->setOutlineColor(_market_outline_color);
-    shape->setPosition(_pos.x, _pos.y);
-    _shape = shape;
+    _shape = std::make_shared<sf::RectangleShape>(_market_shape_size);
+    _shape->setFillColor(_market_shape_color);
+    _shape->setOutlineThickness(_market_shape_outline_thickness);
+    _shape->setOutlineColor(_market_outline_color);
+    _shape->setPosition(_pos.x, _pos.y);
 }

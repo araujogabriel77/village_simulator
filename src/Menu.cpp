@@ -2,11 +2,8 @@
 // Created by Gabriel on 28/12/2024.
 //
 
-#include "Menu.h"
-
-#include <iostream>
 #include <memory>
-
+#include "Menu.h"
 #include "House.h"
 #include "Market.h"
 
@@ -61,11 +58,11 @@ void Menu::setShape() {
     _shape->setOutlineThickness(_menu_outline_thickness);
 }
 
-Vec2 Menu::size() {
+Vec2 Menu::size() const {
     return _size;
 }
 
-Vec2 Menu::position() {
+Vec2 Menu::position() const {
     return _position;
 }
 
