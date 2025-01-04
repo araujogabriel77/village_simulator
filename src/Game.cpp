@@ -10,6 +10,7 @@
 
 
 Game::Game() {
+    _font.loadFromFile("../assets/fonts/Roboto/Roboto-Regular.ttf");
     init_window();
 }
 
@@ -117,8 +118,16 @@ void Game::render_system() {
         const auto prev_dindin = building->balance();
         building->make_money();
         if (prev_dindin < building->balance()) {
-            std::cout << building->balance() << std::endl;
+            _total_coins += building->balance();
         }
     }
+
+    sf::Text text(_, _font);
+    text.setPosition(500, 10);
+    text.setCharacterSize(30);
+    text.setStyle(sf::Text::Bold);
+    text.setFillColor(sf::Color::Red);
+    _window.draw(text);
+
     _window.display();
 }

@@ -8,18 +8,21 @@
 
 #include "Menu.h"
 
-
 class Game {
 protected:
     int _frame_limit = 30;
     bool _vertical_sync_enabled = true;
-    sf::VideoMode _window_size = sf::VideoMode(1280, 720);
+    sf::VideoMode _window_size = sf::VideoMode(1024, 600);
     sf::RenderWindow _window;
 
     Vec2 _menu_size = Vec2(100, static_cast<float>(_window_size.height - 10));
     Vec2 _menu_position = Vec2(5, 5);
     Menu _menu = Menu(_menu_size, _menu_position);
     std::string _game_name = "Village Simulator";
+
+    sf::Font _font;
+    sf::Text _total_coins_text;
+    float _total_coins = 0;
 
     bool _is_game_running = true;
 
