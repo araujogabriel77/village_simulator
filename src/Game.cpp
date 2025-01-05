@@ -10,7 +10,7 @@
 
 
 Game::Game() {
-    _font.loadFromFile("../assets/fonts/Roboto/Roboto-Regular.ttf");
+    set_text_config();
     init_window();
 }
 
@@ -47,12 +47,12 @@ void Game::user_input_system() {
                 switch (building) {
                     case BuildingType::House: {
                         _current_selected_building = std::make_shared<House>(
-                        building_id, Vec2(500, 500));
+                            building_id, Vec2(500, 500));
                         break;
                     }
                     case BuildingType::Market: {
                         _current_selected_building = std::make_shared<Market>(
-                        building_id, Vec2(500, 500));
+                            building_id, Vec2(500, 500));
                         break;
                     }
                     case BuildingType::None: {
@@ -68,16 +68,14 @@ void Game::user_input_system() {
 
                 return;
             }
-            if (event.mouseButton.button == sf::Mouse::Left && _has_building_selected)
-            {
+            if (event.mouseButton.button == sf::Mouse::Left && _has_building_selected) {
                 _current_selected_building->init_time_count();
                 add_building(_current_selected_building);
                 deselect_current_building();
                 return;
             }
 
-            if (event.mouseButton.button == sf::Mouse::Right && _has_building_selected)
-            {
+            if (event.mouseButton.button == sf::Mouse::Right && _has_building_selected) {
                 deselect_current_building();
                 std::cout << "cancel\n";
                 return;
@@ -88,10 +86,12 @@ void Game::user_input_system() {
 
 void Game::update_current_selected_building_position() const {
     const auto mouse_position = sf::Mouse::getPosition(_window); // Posição do mouse em relação à janela
-    _current_selected_building->change_pos(Vec2(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y)));// Ajustar para centralizar o círculo
+    _current_selected_building->change_pos(Vec2(static_cast<float>(mouse_position.x),
+                                                static_cast<float>(mouse_position.y)));
+    // Ajustar para centralizar o círculo
 }
 
-void Game::add_building(const std::shared_ptr<Building>& building_to_add) {
+void Game::add_building(const std::shared_ptr<Building> &building_to_add) {
     _buildings.push_back(building_to_add);
 }
 
@@ -99,6 +99,38 @@ void Game::deselect_current_building() {
     _current_selected_building = nullptr;
     _has_building_selected = false;
 }
+
+void Game::set_text_config() {
+    _font.loadFromFile(_font_path);
+    _total_coins_text.setPosition(500, 10);
+    _total_coins_text.setCharacterSize(30);
+    _total_coins_text.setStyle(sf::Text::Bold);
+    _total_coins_text.setFillColor(sf::Color::Yellow);
+}
+
+void Game::draw_points() {
+    const auto text = std::to_string(static_cast<int>(_total_coins));
+    _total_coins_text.setString(text);
+    _window.draw(_total_coins_text);
+}
+
+void Game::update_economy() {
+    for (const auto &building: _buildings) {
+        const auto previous_balance = building->balance();
+        building->make_money();
+        if (previous_balance < building->balance()) {
+            _total_coins += building->rentability();
+        }
+    }
+
+}
+
+void Game::draw_buildings() {
+    for (const auto &building: _buildings) {
+        building->draw(&_window);
+    }
+}
+
 
 void Game::render_system() {
     _window.clear();
@@ -111,23 +143,8 @@ void Game::render_system() {
         _current_selected_building->draw(&_window);
     }
 
-    for (const auto& building: _buildings) {
-        building->draw(&_window);
-
-        // @TODO: mover para economy system
-        const auto prev_dindin = building->balance();
-        building->make_money();
-        if (prev_dindin < building->balance()) {
-            _total_coins += building->balance();
-        }
-    }
-
-    sf::Text text(_, _font);
-    text.setPosition(500, 10);
-    text.setCharacterSize(30);
-    text.setStyle(sf::Text::Bold);
-    text.setFillColor(sf::Color::Red);
-    _window.draw(text);
-
+    draw_buildings();
+    update_economy();
+    draw_points();
     _window.display();
 }

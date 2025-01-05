@@ -20,9 +20,10 @@ protected:
     Menu _menu = Menu(_menu_size, _menu_position);
     std::string _game_name = "Village Simulator";
 
+    std::string _font_path = "../assets/fonts/Roboto/Roboto-Regular.ttf";
     sf::Font _font;
-    sf::Text _total_coins_text;
     float _total_coins = 0;
+    sf::Text _total_coins_text = sf::Text('0', _font);
 
     bool _is_game_running = true;
 
@@ -37,8 +38,11 @@ protected:
     void render_system();
     void update_current_selected_building_position() const;
     void deselect_current_building();
+    void set_text_config();
+    void draw_points();
+    void draw_buildings();
+    void update_economy();
     // void time_system();
-    // void economy_system();
 
     void add_building(const std::shared_ptr<Building>& building_to_add);
     void remove_building();
