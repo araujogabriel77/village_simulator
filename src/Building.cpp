@@ -83,3 +83,7 @@ float Building::cost() const {
 float Building::rentability() const {
     return _rentability;
 }
+
+Vec2 Building::size() const {
+    return Vec2(_shape->getSize().x, _shape->getSize().y);
+}

@@ -26,6 +26,9 @@ protected:
     sf::Text _total_coins_text = sf::Text('0', _font);
 
     bool _is_game_running = true;
+    float _draw_area_x = (_window_size.width - _menu_size.x - 30);
+    float _draw_area_y = (_window_size.height - 110);
+    sf::RectangleShape _draw_area = sf::RectangleShape(sf::Vector2f(_draw_area_x, _draw_area_y));
 
     // ID RESERVADO PARA A CONSTRUÇÃO SELECIONADA
     int _current_selected_building_id = 1;
@@ -34,15 +37,19 @@ protected:
     std::vector<std::shared_ptr<Building>> _buildings;
 
     void init_window();
+    void init_draw_area();
+    void set_text_config();
     void user_input_system();
     void render_system();
     void update_current_selected_building_position() const;
     void deselect_current_building();
-    void set_text_config();
     void draw_points();
     void draw_buildings();
+    void draw_menu();
+    void draw_current_selected_building();
     void update_economy();
-    // void time_system();
+
+    bool check_if_is_inside_draw_area(const Vec2& origin) const;
 
     void add_building(const std::shared_ptr<Building>& building_to_add);
     void remove_building();

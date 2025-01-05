@@ -68,6 +68,8 @@ public:
     float rentability() const;
 
     int seconds_to_profit() const;
+
+    Vec2 size() const;
 };
 
 #endif //BUILDING_H
